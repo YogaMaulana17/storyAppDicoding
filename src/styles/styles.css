@@ -111,6 +111,19 @@ header {
   top: 10px;
 }
 
+/* ditambahkan */
+#map {
+  z-index: 1;
+  pointer-events: auto;
+  touch-action: auto;
+  user-select: none;
+  cursor: grab;
+}
+
+.leaflet-control-layers {
+  z-index: 1000;
+}
+
 /* Write your styles more here */
 @keyframes fadeInUp {
   from {

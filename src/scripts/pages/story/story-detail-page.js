@@ -54,7 +54,17 @@ export default class StoryDetailPage {
     });
 
     const locationName = await getLocationName(story.lat, story.lon);
-    initMap({ lat: story.lat, lng: story.lon, popupText: locationName });
+    // initMap({ lat: story.lat, lng: story.lon, popupText: locationName });
+    //diganti ini
+    const mapInstance = initMap({
+      lat: story.lat,
+      lng: story.lon,
+      popupText: locationName,
+    });
+
+    setTimeout(() => {
+      mapInstance.invalidateSize();
+    }, 200);
 
     const toggleButton = document.getElementById("toggle-favorite");
     const existing = await Database.getStory(story.id);

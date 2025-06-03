@@ -110,7 +110,8 @@ class StoryPage {
       // Tambahkan marker baru
       selectedMarker = L.marker([lat, lng])
         .addTo(map)
-        .bindPopup("Lokasi dipilih")
+        //yang di ubah
+        .bindPopup("Lokasi dipilih", { offset: [0, -30] })
         .openPopup();
     });
     this.#capturedPhoto = null;

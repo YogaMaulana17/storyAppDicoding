@@ -46,7 +46,13 @@ export function initMap({
     existingMap._leaflet_id = null;
   }
 
-  const map = L.map(id).setView([lat, lng], zoom);
+  // const map = L.map(id).setView([lat, lng], zoom);
+  const map = L.map(id, {
+    dragging: true,
+    tap: false,
+    zoomControl: true,
+    scrollWheelZoom: true,
+  }).setView([lat, lng], zoom);
 
   const streets = L.tileLayer(
     `https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${MAPTILER_API_KEY}`,
@@ -73,7 +79,16 @@ export function initMap({
 
   L.control.layers(baseLayer).addTo(map);
 
-  L.marker([lat, lng]).addTo(map).bindPopup(popupText).openPopup();
+  // L.marker([lat, lng]).addTo(map).bindPopup(popupText).openPopup();
+  //diganti ini
+  L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(popupText, {
+      offset: [0, -40], // Ubah sesuai arah yang kamu mau
+      autoPan: true,
+      closeButton: true,
+    })
+    .openPopup();
 
   return map;
 }
@@ -93,7 +108,12 @@ export function getUserLocation(map) {
           // Tambahkan marker di lokasi User
           L.marker([latitude, longitude])
             .addTo(map)
-            .bindPopup("Lokasi Anda")
+            //yng di ubah
+            .bindTooltip("Lokasi Realtime Anda", {
+              permanent: true,
+              direction: "top",
+              offset: [0, -40],
+            })
             .openPopup();
 
           // Kirim data latitude & longitude balik ke pemanggil
